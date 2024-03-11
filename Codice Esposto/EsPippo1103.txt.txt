@@ -1,0 +1,27 @@
+import java.util.Scanner;
+public class Test {
+    public static void main(String[] args) {
+        //creo variabili e oggetti
+        Scanner scanner = new Scanner(System.in);
+        int x = 4;
+        int y = 2;
+        int counter = 0;
+        int scelta = 0;
+        //ciclo for non inizializzato per visualizzazione menu
+        for (; scelta != 5; ) {
+            System.out.println("Menu:");
+            System.out.println("1. Addizione");
+            System.out.println("2. Sottrazione");
+            System.out.println("3. Moltiplicazione");
+            System.out.println("4. Divisione");
+            System.out.println("5. Esci");
+            System.out.print("Scelta: ");
+            scelta = scanner.nextInt();
+            
+            //rottura del ciclo
+            if (scelta == 5) {
+                break;
+            }
+            //ciclo con risultati giusti 
+            if (scelta >= 1 && scelta <= 4) {
+                int risultatoCorretto = 0; 
