@@ -1,0 +1,41 @@
+import java.util.ArrayList;
+import java.util.Random;
+
+public class StadiumAttendance {
+    
+    public static void main(String[] args) {
+        Random random = new Random();
+        ArrayList<Integer> saturdaySpectators = new ArrayList<>();
+        ArrayList<Integer> sundaySpectators = new ArrayList<>();
+        int totalIncome = 0;
+        
+        // Popola l'ArrayList con il numero di spettatori casuali per sabato
+        int count = 0;
+        while (count < 1) { // supponendo che vogliamo generare i dati per un solo sabato
+            int spectators = random.nextInt(75000) + 1; // da 1 a 75000
+            saturdaySpectators.add(spectators);
+            totalIncome += spectators * 20; // Costo del biglietto sabato: $20
+            count++;
+        }
+        
+        // Popola l'ArrayList con il numero di spettatori casuali per domenica
+        count = 0;
+        do {
+            int spectators = random.nextInt(75000) + 1; // da 1 a 75000
+            sundaySpectators.add(spectators);
+            totalIncome += spectators * 15; // Costo del biglietto domenica: $15
+            count++;
+        } while (count < 1); // supponendo che vogliamo generare i dati per una sola domenica
+        
+        // Stampa un riepilogo
+        for (int i = 0; i < saturdaySpectators.size(); i++) {
+            System.out.println("Sabato " + (i+1) + ": Spettatori = " + saturdaySpectators.get(i) + ", Incasso = $" + (saturdaySpectators.get(i) * 20));
+        }
+        
+        for (int i = 0; i < sundaySpectators.size(); i++) {
+            System.out.println("Domenica " + (i+1) + ": Spettatori = " + sundaySpectators.get(i) + ", Incasso = $" + (sundaySpectators.get(i) * 15));
+        }
+        
+        System.out.println("Incasso totale per il weekend: $" + totalIncome);
+    }
+}
