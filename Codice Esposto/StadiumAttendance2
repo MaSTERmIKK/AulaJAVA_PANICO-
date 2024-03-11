@@ -1,0 +1,28 @@
+import java.util.Random;
+
+public class StadiumAttendance {
+
+    public static void main(String[] args) {
+        int spectatorID = 0;
+        int totalIncome = 0;
+        Random random = new Random();
+
+        // Simula la vendita dei biglietti per sabato
+        int saturdaySpectators = random.nextInt(75000) + 1; // da 1 a 75000
+        int saturdayIncome = saturdaySpectators * 20; // Costo del biglietto sabato: $20
+        totalIncome += saturdayIncome;
+        spectatorID += saturdaySpectators;
+
+        // Simula la vendita dei biglietti per domenica
+        int sundaySpectators = random.nextInt(75000) + 1; // da 1 a 75000
+        int sundayIncome = sundaySpectators * 15; // Costo del biglietto domenica: $15
+        totalIncome += sundayIncome;
+        spectatorID += sundaySpectators;
+
+        // Stampa un riepilogo
+        System.out.println("Sabato: Spettatori = " + saturdaySpectators + ", Incasso = $" + saturdayIncome);
+        System.out.println("Domenica: Spettatori = " + sundaySpectators + ", Incasso = $" + sundayIncome);
+        System.out.println("Incasso totale per il weekend: $" + totalIncome);
+        System.out.println("ID spettatore corrente: " + spectatorID);
+    }
+}
