@@ -1,0 +1,36 @@
+import java.util.Random;
+
+public class StadiumAttendance {
+    private int spectatorID = 0;
+    private int totalIncome = 0;
+    private Random random = new Random();
+
+    // Metodi per simulare la vendita dei biglietti per il weekend
+    public void simulateWeekend() {
+        // Simula la vendita dei biglietti per sabato e domenica
+        int saturdaySpectators = random.nextInt(75000) + 1; // da 1 a 75000
+        int sundaySpectators = random.nextInt(75000) + 1; // da 1 a 75000
+
+        // Calcola il reddito per ogni giorno
+        int saturdayIncome = saturdaySpectators * 20;
+        int sundayIncome = sundaySpectators * 15;
+
+        // Aggiorna il totale del reddito
+        totalIncome += saturdayIncome + sundayIncome;
+
+        // Stampa un riepilogo
+        System.out.println("Sabato: Spettatori = " + saturdaySpectators + ", Incasso = $" + saturdayIncome);
+        System.out.println("Domenica: Spettatori = " + sundaySpectators + ", Incasso = $" + sundayIncome);
+    }
+
+    // Metodo per ottenere il totale del reddito
+    public int getTotalIncome() {
+        return totalIncome;
+    }
+
+    public static void main(String[] args) {
+        StadiumAttendance stadium = new StadiumAttendance();
+        stadium.simulateWeekend();
+        System.out.println("Incasso totale: $" + stadium.getTotalIncome());
+    }
+}
