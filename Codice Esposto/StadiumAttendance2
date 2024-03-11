@@ -6,6 +6,8 @@ public class StadiumAttendance {
         int spectatorID = 0;
         int totalIncome = 0;
         Random random = new Random();
+        //random = Math.random (0, 75000)
+
 
         // Simula la vendita dei biglietti per sabato
         int saturdaySpectators = random.nextInt(75000) + 1; // da 1 a 75000
