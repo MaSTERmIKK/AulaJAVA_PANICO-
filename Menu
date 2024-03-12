@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class Menu {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Benvenuto nel menu del piatto speciale!");
+        System.out.println("Scegli il tipo di panino: 1. Normale (€2) 2. Sesamo (€2.5)");
+        int sceltaPanino = scanner.nextInt();
+        double prezzoPanino = sceltaPanino == 1 ? 2.0 : 2.5;
+        String tipoPanino = sceltaPanino == 1 ? "Normale" : "Sesamo";
+
+        PiattoSpeciale piatto = new PiattoSpeciale(tipoPanino);
+        piatto.calcolaPrezzoTotale(prezzoPanino);
+
+        System.out.println("Inserisci l'ingrediente privato (Formaggio o Salsa): ");
+        String ingredientePrivato = scanner.next();
+        double prezzoIngredientePrivato = 0;
+
+        // Verifica dell'ingrediente privato e del suo prezzo
+        if (ingredientePrivato.equalsIgnoreCase("Formaggio")) {
+            prezzoIngredientePrivato = 1.5;
+        } else if (ingredientePrivato.equalsIgnoreCase("Salsa")) {
+            prezzoIngredientePrivato = 1.0;
+        } else {
+            System.out.println("Ingrediente non valido.");
+            System.exit(0);
+        }
+
+        piatto.aggiungiIngredientePrivato(ingredientePrivato, prezzoIngredientePrivato);
+
+        System.out.println("Hai ordinato un panino " + piatto.getPanino() + " con " + piatto.getIngredientePrivato() + ".");
+        System.out.println("Il prezzo totale è: €" + piatto.getPrezzoTotale());
+    }
+}
