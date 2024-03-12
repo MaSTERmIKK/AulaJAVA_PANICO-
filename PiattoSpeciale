@@ -1,0 +1,32 @@
+public class PiattoSpeciale {
+    private static final double PREZZO_BASE = 1.0; // Prezzo fisso base
+    private double prezzoTotale;
+    private String panino; // Ingrediente pubblico (es: normale, sesamo)
+    private String ingredientePrivato; // Ingrediente privato
+
+    public PiattoSpeciale(String panino) {
+        this.panino = panino;
+        this.prezzoTotale = PREZZO_BASE;
+    }
+
+    public void aggiungiIngredientePrivato(String ingrediente, double prezzo) {
+        this.ingredientePrivato = ingrediente;
+        this.prezzoTotale += prezzo;
+    }
+
+    public void calcolaPrezzoTotale(double prezzoIngredientePubblico) {
+        this.prezzoTotale += prezzoIngredientePubblico;
+    }
+
+    public double getPrezzoTotale() {
+        return prezzoTotale;
+    }
+
+    public String getPanino() {
+        return panino;
+    }
+
+    public String getIngredientePrivato() {
+        return ingredientePrivato;
+    }
+}
