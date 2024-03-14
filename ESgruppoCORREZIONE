@@ -1,0 +1,109 @@
+import java.util.*;
+
+public class McDonald {
+    private Map<String, Cliente> clienti = new HashMap<>();
+    private List<Tavolo> tavoli = new ArrayList<>();
+    private static final int NUMERO_TAVOLI = 6;
+
+    // Classe interna per gestire i clienti
+    public class Cliente {
+        String nome;
+        double budget;
+
+        public Cliente(String nome, double budget) {
+            this.nome = nome;
+            this.budget = budget;
+        }
+
+        // Metodi per gestire i clienti...
+    }
+
+    // Classe interna per gestire i tavoli
+    public class Tavolo {
+        int numero;
+        boolean occupato;
+
+        public Tavolo(int numero) {
+            this.numero = numero;
+            this.occupato = false;
+        }
+
+        // Metodi per gestire i tavoli...
+    }
+
+    // Metodo per registrare o loggare automaticamente un cliente
+    public Cliente loginORegistra(String nome) {
+        Cliente cliente = clienti.get(nome);
+        if (cliente == null) {
+            // Assume un budget di default per la demo
+            cliente = new Cliente(nome, 10.0);
+            clienti.put(nome, cliente);
+        }
+        return cliente;
+    }
+
+    // Metodo per scegliere il budget
+    public void scegliBudget(Cliente cliente, double budget) {
+        cliente.budget = budget;
+    }
+
+    // Metodo per assegnare un tavolo a un cliente
+    public Tavolo assegnaTavolo() {
+        for (Tavolo tavolo : tavoli) {
+            if (!tavolo.occupato) {
+                tavolo.occupato = true;
+                return tavolo;
+            }
+        }
+        return null; // Nessun tavolo disponibile
+    }
+
+    // Metodo per gestire il budget e i pacchetti menu
+    public String scegliPacchetto(Cliente cliente, double budgetScelto) {
+        // Logica per scegliere un pacchetto basato sul budget
+        // ...
+
+        // Logica per le promozioni
+        if (cliente.nome.equals("nomePrecedente")) { // sostituisci "nomePrecedente" con una variabile appropriata
+            budgetScelto *= 1.3; // incrementa il budget del 30% per la promozione
+        }
+
+        cliente.budget = budgetScelto;
+        return "Pacchetto scelto con successo e budget aggiornato.";
+    }
+
+    // Metodo main per testare il sistema
+    public static void main(String[] args) {
+        McDonald mcdonald = new McDonald();
+        // Inizializza i tavoli
+        for (int i = 1; i <= NUMERO_TAVOLI; i++) {
+            mcdonald.tavoli.add(mcdonald.new Tavolo(i));
+        }
+        
+        // Esegui il login o la registrazione di un cliente
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Inserisci il tuo nome: ");
+        String nome = scanner.nextLine();
+        Cliente cliente = mcdonald.loginORegistra(nome);
+        
+        // Scegli un budget
+        System.out.print("Scegli il tuo budget: ");
+        double budget = scanner.nextDouble();
+        mcdonald.scegliBudget(cliente, budget);
+        
+        // Assegna un tavolo
+        Tavolo tavolo = mcdonald.assegnaTavolo();
+        if (tavolo != null) {
+            System.out.println("Tavolo " + tavolo.numero + " assegnato con successo.");
+        } else {
+            System.out.println("Ci dispiace, al momento non ci sono tavoli disponibili.");
+        }
+        
+        // Gestione del pacchetto e promozioni
+        // ...
+
+        scanner.close();
+    }
+
+    // Getters e Setters qui...
+}
