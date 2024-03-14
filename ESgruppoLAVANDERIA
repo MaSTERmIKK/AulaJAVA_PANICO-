@@ -1,0 +1,107 @@
+import java.util.Scanner;
+
+public class Lavanderia {
+    private String nome;
+    private String password;
+    private double saldo;
+
+    // Costruttore
+    public Lavanderia(String nome, String password, double saldo) {
+        this.nome = nome;
+        this.password = password;
+        this.saldo = saldo;
+    }
+
+    // Metodo per ricaricare il saldo
+    public void ricaricaSaldo(double importo) {
+        // Controllo per le promozioni
+        if (saldo > 20) {
+            saldo += importo * 2; // raddoppia la ricarica se il saldo è maggiore di 20
+        } else if (saldo == 0 && importo == 10) {
+            saldo += 8; // promozione specifica
+        } else {
+            saldo += importo;
+        }
+    }
+
+    // Metodo per caricare i panni nella lavatrice
+    public String caricaPanni(int panni) {
+        if (panni <= 0 || panni > 10) {
+            return "Quantità non valida. Puoi caricare da 1 a 10 panni.";
+        }
+
+        double costoPerPanno = 1;
+        double costoTotale = panni * costoPerPanno;
+
+        if (costoTotale <= saldo) {
+            saldo -= costoTotale;
+            return "Hai caricato " + panni + " panni. Costo: " + costoTotale + " euro. Saldo rimanente: " + saldo + " euro.";
+        } else {
+            return "Saldo insufficiente.";
+        }
+    }
+
+    // Getters e Setters
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    // Metodo principale per eseguire il programma
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Creazione di un account per la lavanderia
+        System.out.println("Creazione di un nuovo account per la lavanderia.");
+        System.out.print("Inserisci il nome: ");
+        String nome = scanner.nextLine();
+        System.out.print("Inserisci la password: ");
+        String password = scanner.nextLine();
+        Lavanderia account = new Lavanderia(nome, password, 0);
+        
+        // Interazione con l'utente per la ricarica del saldo e il caricamento dei panni
+        boolean fine = false;
+        while (!fine) {
+            System.out.print("Vuoi ricaricare il saldo? (s/n): ");
+            if (scanner.nextLine().equals("s")) {
+                System.out.print("Quanto vuoi ricaricare? ");
+                double importo = scanner.nextDouble();
+                scanner.nextLine(); // Consuma la linea rimanente
+                account.ricaricaSaldo(importo);
+                System.out.println("Saldo aggiornato: " + account.getSaldo() + " euro.");
+            }
+
+            System.out.print("Vuoi caricare dei panni nella lavatrice? (s/n): ");
+            if (scanner.nextLine().equals("s")) {
+                System.out.print("Quanti panni vuoi caricare? ");
+                int panni = scanner.nextInt();
+                scanner.nextLine(); // Consuma la linea rimanente
+                System.out.println(account.caricaPanni(panni));
+            }
+
+            System.out.print("Vuoi terminare? (s/n): ");
+            fine = scanner.nextLine().equals("s");
+        }
+
+        scanner.close();
+    }
+}
