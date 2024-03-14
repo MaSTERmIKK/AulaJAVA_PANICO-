@@ -1,0 +1,90 @@
+import java.util.*;
+
+public class Concessionario {
+    private Map<String, User> utenti = new HashMap<>();
+    private List<Veicolo> catalogo = new ArrayList<>();
+    private Map<String, List<Veicolo>> storicoAcquisti = new HashMap<>();
+
+    // Classe interna per gestire gli utenti
+    public class User {
+        String nome;
+        String password;
+        String id;
+        double saldo;
+
+        public User(String nome, String password, String id, double saldo) {
+            this.nome = nome;
+            this.password = password;
+            this.id = id;
+            this.saldo = saldo;
+        }
+
+        // Getters e Setters qui...
+    }
+
+    // Classe interna per gestire i veicoli
+    public class Veicolo {
+        String tipo;
+        double prezzo;
+        String descrizione;
+
+        public Veicolo(String tipo, double prezzo, String descrizione) {
+            this.tipo = tipo;
+            this.prezzo = prezzo;
+            this.descrizione = descrizione;
+        }
+
+        // Getters e Setters qui...
+    }
+
+    // Metodo per registrare un utente
+    public void registrazione(String nome, String password, String id, double saldo) {
+        utenti.put(id, new User(nome, password, id, saldo));
+    }
+
+    // Metodo per il login dell'utente
+    public User login(String id, String password) {
+        User user = utenti.get(id);
+        if (user != null && user.password.equals(password)) {
+            return user;
+        }
+        return null;
+    }
+
+    // Metodo per aggiungere veicoli al catalogo
+    public void aggiungiVeicoloAlCatalogo(String tipo, double prezzo, String descrizione) {
+        catalogo.add(new Veicolo(tipo, prezzo, descrizione));
+    }
+
+    // Metodo per comprare un veicolo
+    public String compraVeicolo(User utente, Veicolo veicolo) {
+        if (utente.saldo >= veicolo.prezzo) {
+            utente.saldo -= veicolo.prezzo;
+            storicoAcquisti.computeIfAbsent(utente.id, k -> new ArrayList<>()).add(veicolo);
+            
+            // Controlla promozioni
+            if (storicoAcquisti.get(utente.id).size() == 3) {
+                return "Complimenti! Hai diritto a uno sconto del 50% sul tuo prossimo acquisto.";
+            }
+
+            return "Acquisto effettuato con successo!";
+        } else {
+            return "Saldo insufficiente per l'acquisto.";
+        }
+    }
+
+    // Metodo per visualizzare il catalogo
+    public String visualizzaCatalogo() {
+        StringBuilder sb = new StringBuilder();
+        for (Veicolo veicolo : catalogo) {
+            sb.append("Tipo: ").append(veicolo.tipo).append(", Prezzo: ").append(veicolo.prezzo).append(", Descrizione: ").append(veicolo.descrizione).append("\n");
+        }
+        return sb.toString();
+    }
+
+    // Qui si potrebbe inserire il metodo main per testare il codice
+    // Getters e Setters qui...
+}
+
+// Nota che questo è una soluzoione minima . Per un sistema reale, dovresti considerare l'uso di una base di dati per gli utenti e i veicoli,
+// oltre a gestire meglio la sicurezza e la persistenza dei dati.
