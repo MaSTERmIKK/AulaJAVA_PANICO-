@@ -19,7 +19,7 @@ public class Concessionario {
             this.saldo = saldo;
         }
 
-        // Getters e Setters qui...
+        // Getters e Setters dovranno essere utilizzati qui 
     }
 
     // Classe interna per gestire i veicoli
