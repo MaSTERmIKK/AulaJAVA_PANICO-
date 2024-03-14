@@ -1,0 +1,84 @@
+import java.util.Random;
+
+// Classe base
+class DispositivoElettronico {
+    public void avviaApplicazione(String nomeApp) {
+        System.out.println("Applicazione " + nomeApp + " avviata su dispositivo generico.");
+    }
+}
+
+// Smartphone
+class Smartphone extends DispositivoElettronico {
+    private String nome;
+    private String password;
+
+    public Smartphone(String nome, String password) {
+        this.nome = nome;
+        this.password = password;
+    }
+
+    @Override
+    public void avviaApplicazione(String nomeApp) {
+        super.avviaApplicazione(nomeApp);
+        System.out.println("Logging con nome: " + nome + " e password: " + password);
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+}
+
+// Tablet
+class Tablet extends DispositivoElettronico {
+    private static int ultimoId = 0;
+    private int id;
+    private float punti;
+
+    public Tablet() {
+        ultimoId++;
+        this.id = ultimoId;
+        this.punti = new Random().nextFloat() * 100; // Punti casuali da 0 a 100
+    }
+
+    @Override
+    public void avviaApplicazione(String nomeApp) {
+        super.avviaApplicazione(nomeApp);
+        System.out.println("Creazione valore utente: Punti " + punti + ", ID " + id);
+    }
+
+    public float getPunti() {
+        return punti;
+    }
+
+    public int getId() {
+        return id;
+    }
+}
+
+// ResocontoDigitale
+class ResocontoDigitale {
+    public static void stampaResoconto(Smartphone smartphone, Tablet tablet) {
+        System.out.println("Resoconto Digitale:");
+        System.out.println("Nome: " + smartphone.getNome());
+        System.out.println("Password: " + smartphone.getPassword());
+        System.out.println("Punti: " + tablet.getPunti());
+        System.out.println("ID: " + tablet.getId());
+    }
+}
+
+// Classe principale per testare
+public class Main {
+    public static void main(String[] args) {
+        Smartphone smartphone = new Smartphone("Utente1", "PasswordSegreta");
+        Tablet tablet = new Tablet();
+
+        smartphone.avviaApplicazione("WhatsApp");
+        tablet.avviaApplicazione("Netflix");
+
+        ResocontoDigitale.stampaResoconto(smartphone, tablet);
+    }
+}
